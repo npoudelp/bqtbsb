@@ -12,6 +12,8 @@
 
     <title>{% block title %}{% endblock %}</title>
 
+    {% block style_added %}{% endblock %}
+
     <style>
         @media (min-width: 991.98px) {
             main {
@@ -82,13 +84,13 @@
             <!-- Container wrapper -->
             <div class="container-fluid">
                 <!-- Toggle button -->
-                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
                     aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
+                    <i class="bi bi-award"></i>
                 </button>
 
                 <!-- Brand -->
-                <a class="navbar-brand" href="{% url 'dashboard' %}">
+                <a class="navbar-brand mx-5" href="{% url 'dashboard' %}">
                     <span class="h3 " style="font-family: cursive;">npoudelp</span>
                 </a>
 

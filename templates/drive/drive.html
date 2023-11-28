@@ -3,6 +3,14 @@
 
 {% block drive_active %}active{% endblock %}
 
+{% block style_added %}
+<style>
+    .modal-backdrop {
+        z-index: -1;
+    }
+</style>
+{% endblock %}
+
 {% block header_misc %}
 <a href="#" class="nav-link mx-3" data-bs-toggle="modal" data-bs-target="#upload_popup">
     <i class="bi bi-cloud-arrow-up-fill mx-1"></i>Upload
@@ -20,7 +28,8 @@
                 </span>
             </div>
             <div class="modal-body">
-                <form action="{% url 'drive:upload_file' }">
+                <form action="{% url 'drive:upload_file' }" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="exampleInputEmail1">Choose your file</label>
                         <input type="file" class="form-control" id="upload_file" name="upload_file"
