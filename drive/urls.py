@@ -22,5 +22,5 @@ app_name = 'drive'
 
 urlpatterns = [
     path('', views.my_drive, name="my_drive"),
-    path('upload_file/', views.upload_file, name='upload_file')
+    path('<int:id>', views.delete_file, name="delete_file"),
 ]
