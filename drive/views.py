@@ -1,25 +1,33 @@
 from django.shortcuts import render, redirect
-from drive.forms import upload_files_form
+from drive.forms import upload_files_form, tags_form
 from django.contrib import messages
 from django.contrib.auth import decorators
-from drive.models import upload_files as drive_image
+from drive.models import upload_files as drive_image, tags
 from django.http import Http404
 
+def get_from_tags():
+    data = tags.objects.all().order_by('-id')
+    return data
+
 def my_drive(request):
-
-
     res = {
         "upload_form": upload_files_form,
-        "images": drive_image.objects.all().order_by('-id')
+        "images": drive_image.objects.all().order_by('-id'),
+        'tags': get_from_tags(),
+        'add_tag_form': tags_form,
     }
 
     if request.method == 'POST':
         form_data = upload_files_form(request.POST, request.FILES)
+        tags_data = tags_form(request.POST)
         if form_data.is_valid():
             form_data.save()
             messages.success(request, "Image added to drive...")
+        elif tags_data.is_valid():
+            tags_data.save()
+            messages.success(request, "Tag added...")
         else:
-            messages.error(request, "Error adding image...")
+            messages.error(request, "Error performing task...")
 
     return render(request, "drive/drive.html", res)
 
@@ -36,6 +44,65 @@ def delete_file(request, id):
             return redirect('drive:my_drive')
     except drive_image.DoesNotExist:
         messages.error(request, "Image does not exist...")
-        raise(Http404)
 
     return render(request, "drive/drive.html", res)
+
+
+def filter_file(request, key):
+    if key == 'old_first':
+        data = drive_image.objects.all()
+    elif key == 'new_first':
+        data = drive_image.objects.all().order_by('-id')
+    else:
+        tag_id = tags.objects.values_list('id', flat=True).filter(tag_name=key)
+        data = drive_image.objects.filter(image_tag__in=tag_id)
+    res = {
+        "upload_form": upload_files_form,
+        'images': data,
+        'tags': get_from_tags(),
+        'add_tag_form': tags_form,
+    }
+
+    if request.method == 'POST':
+        form_data = upload_files_form(request.POST, request.FILES)
+        tags_data = tags_form(request.POST)
+        if form_data.is_valid():
+            form_data.save()
+            messages.success(request, "Image added to drive...")
+        elif tags_data.is_valid():
+            tags_data.save()
+            messages.success(request, "Tag added...")
+        else:
+            messages.error(request, "Error performing task...")
+
+    return render(request, "drive/drive.html", res)
+
+
+def file_viewer(request, id):
+
+    if request.method == 'POST':
+            form_data = upload_files_form(request.POST, request.FILES)
+            tags_data = tags_form(request.POST)
+            if form_data.is_valid():
+                form_data.save()
+                messages.success(request, "Image added to drive...")
+            elif tags_data.is_valid():
+                tags_data.save()
+                messages.success(request, "Tag added...")
+            else:
+                messages.error(request, "Error performing task...")
+
+    try:
+        file = drive_image.objects.get(id=id)
+                
+    except drive_image.DoesNotExist:
+        messages.error(request, "Image does not exist...")
+        raise(Http404)
+
+    res = {
+        "upload_form": upload_files_form,
+        'tags': get_from_tags(),
+        'add_tag_form': tags_form,
+        'image': file
+    }
+    return render(request, "drive/file_viewer.html", res)
