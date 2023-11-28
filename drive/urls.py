@@ -23,4 +23,6 @@ app_name = 'drive'
 urlpatterns = [
     path('', views.my_drive, name="my_drive"),
     path('<int:id>', views.delete_file, name="delete_file"),
+    path('<str:key>', views.filter_file, name="filter_file"),
+    path('view_file/<int:id>', views.file_viewer, name='file_viewer'),
 ]
