@@ -1,0 +1,148 @@
+{%extends 'frame.html'%}
+{%block title%}Display | bqtbsb{% endblock %}
+{%load crispy_forms_tags%}
+{% block drive_active %}active{% endblock %}
+
+{% block style_added %}
+<style>
+    .modal-backdrop {
+        z-index: -1;
+    }
+
+    .red {
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+    }
+
+    .red:hover {
+        filter: blur(3px);
+        -webkit-filter: blur(3px);
+    }
+
+    .yellow {
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+    }
+
+    .yellow:hover {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+    }
+</style>
+{% endblock %}
+
+{% block header_misc %}
+
+<a href="#" class="nav-link mx-3" data-bs-toggle="modal" data-bs-target="#sort_popup">
+    <i class="bi bi-bar-chart-steps mr-2"></i> Sort By
+</a>
+<!-- Modal -->
+<div class="modal fade text-dark" id="sort_popup" tabindex="0" role="dialog" aria-labelledby="sort_popup"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="conteiner-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="lead">Filter By:</p>
+                            <div class="dropdown show border-bottom">
+                                <a class="dropdown-toggle text-decoration-none text-dark" href="#" role="button"
+                                    id="tag_drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Tags
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="tag_drop">
+                                    {% for tag in tags %}
+                                    <a class="dropdown-item"
+                                        href="{% url 'drive:filter_file' key=tag.tag_name %}">{{tag.tag_name}}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="lead">Sort By:</p>
+                            <a class="dropdown-item border-bottom"
+                                href="{% url 'drive:filter_file' key='new_first' %}">New First</a>
+                            <a class="dropdown-item border-bottom"
+                                href="{% url 'drive:filter_file' key='old_first' %}">Old First</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<a href="#" class="nav-link mx-3" data-bs-toggle="modal" data-bs-target="#add_tag_popup">
+    <i class="bi bi-tags mx-1"></i>Add Tags
+</a>
+<!-- Modal -->
+<div class="modal fade text-dark" id="add_tag_popup" tabindex="0" role="dialog" aria-labelledby="add_tag_popup"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="model_header">Add tags for files</h5>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <table>
+                        {{add_tag_form|crispy}}
+                    </table>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark">Add</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<a href="#" class="nav-link mx-3" data-bs-toggle="modal" data-bs-target="#upload_popup">
+    <i class="bi bi-cloud-arrow-up-fill mx-1"></i>Upload
+</a>
+<!-- Modal -->
+<div class="modal fade text-dark" id="upload_popup" tabindex="0" role="dialog" aria-labelledby="upload_popup"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="model_header">Image Upload Form</h5>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table>
+                        {{upload_form|crispy}}
+                    </table>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark">Upload</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block body %}
+<p class="lead text-center">
+    <span class="mx-3">{{image.file_path}}</span>
+    <span class="mx-3">{{image.upload_date}}</span>
+    <span class="mx-3">{{image.image_tag}}</span>
+</p>
+<img src="{{image.file_path.url}}" class="img-fluid" alt="Responsive image">
+{%endblock%}
+
+{% block misc_script %}
+<script>
+
+</script>
+{% endblock %}
