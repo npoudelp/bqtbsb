@@ -86,13 +86,27 @@
                 <!-- Toggle button -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
                     aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="bi bi-award"></i>
+                    <i class="bi bi-columns-gap"></i>
                 </button>
 
                 <!-- Brand -->
                 <a class="navbar-brand mx-5" href="{% url 'dashboard' %}">
                     <span class="h3 " style="font-family: cursive;">npoudelp</span>
                 </a>
+
+                {%if messages%}
+                {%for message in messages%}
+
+                <div class="" id="message">
+                    <p
+                        class="text-center blockquote {% if 'success' in message.level_tag %} text-success  {% else %} text-danger {% endif %}">
+                        {{ message }}
+                    </p>
+
+                </div>
+
+                {%endfor%}
+                {%endif%}
 
                 <!-- Right links -->
                 <ul class="navbar-nav ms-auto d-flex flex-row">
@@ -128,9 +142,14 @@
         {% endblock %}
     </main>
     <!--Main layout-->
+    {% block misc_script %}
 
+    {% endblock %}
     <script>
-
+        setTimeout(()=>{
+            document.getElementById("message").textContent = null;
+        }, 3000
+        )
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
