@@ -49,25 +49,54 @@
                             <p class="lead">Filter By:</p>
                             <div class="dropdown show border-bottom">
                                 <a class="dropdown-toggle text-decoration-none text-dark" href="#" role="button"
-                                    id="tag_drop" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
+                                    id="tag_drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Tags
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="tag_drop">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    {% for tag in tags %}
+                                    <a class="dropdown-item"
+                                        href="{% url 'drive:filter_file' key=tag.tag_name %}">{{tag.tag_name}}</a>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <p class="lead">Sort By:</p>
-                            <a class="dropdown-item border-bottom" href="#">Action</a>
-                            <a class="dropdown-item border-bottom" href="#">Another action</a>
-                            <a class="dropdown-item border-bottom" href="#">Something else here</a>
+                            <a class="dropdown-item border-bottom"
+                                href="{% url 'drive:filter_file' key='new_first' %}">New First</a>
+                            <a class="dropdown-item border-bottom"
+                                href="{% url 'drive:filter_file' key='old_first' %}">Old First</a>
                         </div>
                     </div>
                 </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<a href="#" class="nav-link mx-3" data-bs-toggle="modal" data-bs-target="#add_tag_popup">
+    <i class="bi bi-tags mx-1"></i>Add Tags
+</a>
+<!-- Modal -->
+<div class="modal fade text-dark" id="add_tag_popup" tabindex="0" role="dialog" aria-labelledby="add_tag_popup"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="model_header">Add tags for files</h5>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <table>
+                        {{add_tag_form|crispy}}
+                    </table>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark">Add</button>
+                    </div>
+                </form>
             </div>
 
         </div>
@@ -130,6 +159,7 @@
                         <div class="modal-body">
                             <span class="lead">Upload Date: {{image.upload_date}}</span><br>
                             <span class="lead">Image Shared: {{image.is_shared}}</span><br>
+                            <span class="lead">Image Tag: {{image.image_tag}}</span><br>
                             <span class="lead">File Status:
                                 {% if '2' in image.file_status %}
                                 Unrestricted
@@ -148,6 +178,11 @@
                                 <div class="p-2 mx-3">
                                     <a href="{{image.file_path.url}}" download class="btn btn-outline-dark">
                                         <i class="bi bi-cloud-download-fill h4"></i>
+                                    </a>
+                                </div>
+                                <div class="p-2 mx-3">
+                                    <a href="{% url 'drive:file_viewer' id=image.id %}" class="btn btn-outline-warning">
+                                        <i class="bi bi-eye h4"></i>
                                     </a>
                                 </div>
                             </div>
