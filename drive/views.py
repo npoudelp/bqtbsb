@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import decorators
 from drive.models import upload_files as drive_image, tags
 from django.http import Http404
+from os import remove
 
 def get_from_tags():
     data = tags.objects.all().order_by('-id')
@@ -37,6 +38,7 @@ def delete_file(request, id):
     try:
         file = drive_image.objects.get(id=id)
         if file.delete():
+            remove(f'media/{file.file_path.url}')
             messages.success(request, "Image deleted...")
             return redirect('drive:my_drive')
         else:
@@ -44,8 +46,7 @@ def delete_file(request, id):
             return redirect('drive:my_drive')
     except drive_image.DoesNotExist:
         messages.error(request, "Image does not exist...")
-
-    return render(request, "drive/drive.html", res)
+        return redirect('drive:my_drive')
 
 
 def filter_file(request, key):
