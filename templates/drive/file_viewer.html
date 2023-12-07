@@ -133,12 +133,14 @@
 {% endblock %}
 
 {% block body %}
-<p class="lead text-center">
-    <span class="mx-3">{{image.file_path}}</span>
-    <span class="mx-3">{{image.upload_date}}</span>
-    <span class="mx-3">{{image.image_tag}}</span>
-</p>
-<img src="{{image.file_path.url}}" class="img-fluid" alt="Responsive image">
+<div class="container-fluid">
+    <p class="lead text-center">
+        <span class="mx-3">{{image.file_path}}</span>
+        <span class="mx-3">{{image.upload_date}}</span>
+        <span class="mx-3">{{image.image_tag}}</span>
+    </p>
+    <img src="{{image.file_path.url}}" class="img-fluid" alt="Responsive image">
+</div>
 {%endblock%}
 
 {% block misc_script %}
