@@ -54,6 +54,12 @@ def filter_file(request, key):
         data = drive_image.objects.all()
     elif key == 'new_first':
         data = drive_image.objects.all().order_by('-id')
+    elif key == 'restricted':
+        data = drive_image.objects.all().filter(file_status='0')
+    elif key == 'strict':
+        data = drive_image.objects.all().filter(file_status='1')
+    elif key == 'unrestricted':
+        data = drive_image.objects.all().filter(file_status='2')
     else:
         tag_id = tags.objects.values_list('id', flat=True).filter(tag_name=key)
         data = drive_image.objects.filter(image_tag__in=tag_id)
