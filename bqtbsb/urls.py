@@ -26,4 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.dashboard, name='dashboard'),
     path('drive/', include(drive_path), name='drive'),
+    path('login', views.login, name='login'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
