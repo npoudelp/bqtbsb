@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect
 from drive.forms import upload_files_form, tags_form
 from django.contrib import messages
-from django.contrib.auth import decorators
+from django.contrib.auth.decorators import login_required
 from drive.models import upload_files as drive_image, tags
 from django.http import Http404
 from os import remove
+
 
 def get_from_tags():
     data = tags.objects.all().order_by('-id')
     return data
 
+
+@login_required(login_url='login')
 def my_drive(request):
     res = {
         "upload_form": upload_files_form,
@@ -33,6 +36,7 @@ def my_drive(request):
     return render(request, "drive/drive.html", res)
 
 
+@login_required(login_url='login')
 def delete_file(request, id):
     res = {}
     try:
@@ -49,6 +53,7 @@ def delete_file(request, id):
         return redirect('drive:my_drive')
 
 
+@login_required(login_url='login')
 def filter_file(request, key):
     if key == 'old_first':
         data = drive_image.objects.all()
@@ -85,8 +90,8 @@ def filter_file(request, key):
     return render(request, "drive/drive.html", res)
 
 
+@login_required(login_url='login')
 def file_viewer(request, id):
-
     if request.method == 'POST':
             form_data = upload_files_form(request.POST, request.FILES)
             tags_data = tags_form(request.POST)
