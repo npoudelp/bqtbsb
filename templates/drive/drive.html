@@ -59,6 +59,20 @@
                                     {% endfor %}
                                 </div>
                             </div>
+                            <div class="dropdown show border-bottom">
+                                <a class="dropdown-toggle text-decoration-none text-dark" href="#" role="button"
+                                    id="tag_drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Access
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="tag_drop">
+                                    <a class="dropdown-item border-bottom"
+                                        href="{% url 'drive:filter_file' key='restricted' %}">Restricted</a>
+                                    <a class="dropdown-item border-bottom"
+                                        href="{% url 'drive:filter_file' key='strict' %}">Strict</a>
+                                    <a class="dropdown-item border-bottom"
+                                        href="{% url 'drive:filter_file' key='unrestricted' %}">Unrestricted</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <p class="lead">Sort By:</p>
@@ -140,11 +154,11 @@
         {% if images %}
         <div class="row">
             {% for image in images %}
-            <div class="col-md-3 my-3">
+            <div class="col-md-3 my-2">
                 <div data-bs-toggle="modal" data-bs-target="#description_{{image.id}}"
                     class="card border-3 {% if '2' in image.file_status %} border-success {% elif '1' in image.file_status %} border-warning {% else %} border-danger{%endif%}"
                     style="width: 18rem;">
-                    <img class="card-img-top {% if '2' in image.file_status %}{% elif '1' in image.file_status %} yellow {% else %} red{%endif%}"
+                    <img class="card-img-top rounded {% if '2' in image.file_status %}{% elif '1' in image.file_status %} yellow {% else %} red{%endif%}"
                         src="{{image.file_path.url}}" height="150px">
                 </div>
             </div>
