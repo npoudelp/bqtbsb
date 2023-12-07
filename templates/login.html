@@ -1,0 +1,52 @@
+{%extends 'frame.html'%}
+{%block title%}Display | bqtbsb{% endblock %}
+{%load crispy_forms_tags%}
+
+{% block style_added %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block header_misc %}{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <form class="text-center py-5" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" aria-describedby="email"
+                placeholder="Enter email">
+        </div><br>
+        <div class="form-group">
+            <label for="passwd">Password</label>
+            <input type="password" name="passwd" class="form-control" id="passwd" placeholder="Password">
+        </div><br>
+        <button type="submit" name="submit" class="btn btn-outline-light">Submit</button>
+    </form>
+</div>
+<hr>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 p-2">
+        </div>
+
+        <div class="col-md-4 p-2">
+        </div>
+
+        <div class="col-md-4 p-2">
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}
+
+{% block misc_script %}
+<script>
+
+</script>
+{% endblock %}
