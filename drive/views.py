@@ -39,7 +39,7 @@ def delete_file(request, id):
         file = drive_image.objects.get(id=id)
         if file.delete():
             remove(f'media/{file.file_path.url}')
-            messages.success(request, "Image deleted...")
+            messages.success(request, "Image deleted successfully...")
             return redirect('drive:my_drive')
         else:
             messages.error(request, "Error deleting image...")
