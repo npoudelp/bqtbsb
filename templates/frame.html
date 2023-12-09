@@ -15,6 +15,10 @@
     {% block style_added %}{% endblock %}
 
     <style>
+        * {
+            overflow-x:hidden;
+        }
+
         @media (min-width: 991.98px) {
             main {
                 padding-left: 240px;
@@ -148,7 +152,7 @@
 
     {% endblock %}
     <script>
-        setTimeout(()=>{
+        setTimeout(() => {
             document.getElementById("message").textContent = null;
         }, 3000
         )
