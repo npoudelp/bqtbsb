@@ -107,7 +107,7 @@
                     <table>
                         {{add_tag_form|crispy}}
                     </table>
-                    <div class="modal-footer">  
+                    <div class="modal-footer">
                         <button type="submit" class="btn btn-dark">Add</button>
                     </div>
                 </form>
@@ -155,11 +155,14 @@
         <div class="row">
             {% for image in images %}
             <div class="col-md-3 my-2">
-                <div data-bs-toggle="modal" data-bs-target="#description_{{image.id}}"
-                    class="card border-3 {% if '2' in image.file_status %} border-success {% elif '1' in image.file_status %} border-warning {% else %} border-danger{%endif%}"
+                <div class="card border-3 {% if '2' in image.file_status %} border-success {% elif '1' in image.file_status %} border-warning {% else %} border-danger{%endif%}"
                     style="width: 18rem;">
-                    <img class="card-img-top rounded {% if '2' in image.file_status %}{% elif '1' in image.file_status %} yellow {% else %} red{%endif%}"
-                        src="{{image.file_path.url}}" height="150px">
+                    <a href="{% url 'drive:file_viewer' id=image.id %}">
+                        <img class="card-img-top rounded {% if '2' in image.file_status %} green {% elif '1' in image.file_status %} yellow {% else %} red{%endif%}"
+                            src="{{image.file_path.url}}" height="150px">
+                    </a>
+                    <span class="text-end mx-3 h2 {% if '2' in image.file_status %} text-success {% elif '1' in image.file_status %} text-warning {% else %} text-danger {%endif%}" data-bs-toggle="modal"
+                        data-bs-target="#description_{{image.id}}" style="margin-top: -47px; z-index: 999;">...</span>
                 </div>
             </div>
 
