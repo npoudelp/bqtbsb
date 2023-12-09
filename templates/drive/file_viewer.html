@@ -133,13 +133,14 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <p class="lead text-center">
-        <span class="mx-3">{{image.file_path}}</span>
-        <span class="mx-3">{{image.upload_date}}</span>
-        <span class="mx-3">{{image.image_tag}}</span>
+<div class="container-fluid" style="align-content: center;">
+    <p class="lead">
+        <a href="{% url 'drive:my_drive' %}" class=""><i class="bi bi-arrow-left h3 text-warning"></i></a>
+        <span class="mx-3 text-center">{{image.file_path}}</span>
+        <span class="mx-3 text-center">{{image.upload_date}}</span>
+        <span class="mx-3 text-center">{{image.image_tag}}</span>
     </p>
-    <img src="{{image.file_path.url}}" class="img-fluid" alt="Responsive image">
+    <img src="{{image.file_path.url}}" class="img-fluid" style="max-height: 87vh;" alt="Responsive image">
 </div>
 {%endblock%}
 
