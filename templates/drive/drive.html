@@ -61,10 +61,11 @@
                             </div>
                             <div class="dropdown show border-bottom">
                                 <a class="dropdown-toggle text-decoration-none text-dark" href="#" role="button"
-                                    id="tag_drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    id="access_drop" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
                                     Access
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="tag_drop">
+                                <div class="dropdown-menu" aria-labelledby="access_drop">
                                     <a class="dropdown-item border-bottom"
                                         href="{% url 'drive:filter_file' key='restricted' %}">Restricted</a>
                                     <a class="dropdown-item border-bottom"
@@ -161,8 +162,10 @@
                         <img class="card-img-top rounded {% if '2' in image.file_status %} green {% elif '1' in image.file_status %} yellow {% else %} red{%endif%}"
                             src="{{image.file_path.url}}" height="150px">
                     </a>
-                    <span class="text-end mx-3 h2 {% if '2' in image.file_status %} text-success {% elif '1' in image.file_status %} text-warning {% else %} text-danger {%endif%}" data-bs-toggle="modal"
-                        data-bs-target="#description_{{image.id}}" style="margin-top: -47px; z-index: 999;">...</span>
+                    <span
+                        class="text-end mx-3 h2 {% if '2' in image.file_status %} text-success {% elif '1' in image.file_status %} text-warning {% else %} text-danger {%endif%}"
+                        data-bs-toggle="modal" data-bs-target="#description_{{image.id}}"
+                        style="margin-top: -47px; z-index: 999;">...</span>
                 </div>
             </div>
 
