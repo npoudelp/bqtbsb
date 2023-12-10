@@ -162,10 +162,10 @@
                         <img class="card-img-top rounded {% if '2' in image.file_status %} green {% elif '1' in image.file_status %} yellow {% else %} red{%endif%}"
                             src="{{image.file_path.url}}" height="150px">
                     </a>
-                    <span
-                        class="text-end mx-3 h2 {% if '2' in image.file_status %} text-success {% elif '1' in image.file_status %} text-warning {% else %} text-danger {%endif%}"
-                        data-bs-toggle="modal" data-bs-target="#description_{{image.id}}"
-                        style="margin-top: -47px; z-index: 999;">...</span>
+                        <span
+                            class=" mx-3 h2 {% if '2' in image.file_status %} text-success {% elif '1' in image.file_status %} text-warning {% else %} text-danger {%endif%}"
+                            data-bs-toggle="modal" data-bs-target="#description_{{image.id}}"
+                            style="margin-top: -47px; z-index: 999;">...</span>
                 </div>
             </div>
 
@@ -180,6 +180,7 @@
                             <span class="lead">Upload Date: {{image.upload_date}}</span><br>
                             <span class="lead">Image Shared: {{image.is_shared}}</span><br>
                             <span class="lead">Image Tag: {{image.image_tag}}</span><br>
+                            <span class="lead">Image Liked: {{image.is_liked}}</span><br>
                             <span class="lead">File Status:
                                 {% if '2' in image.file_status %}
                                 Unrestricted
