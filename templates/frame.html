@@ -15,7 +15,7 @@
     {% block style_added %}{% endblock %}
 
     <style>
-        * {
+        body {
             overflow-x:hidden;
         }
 
@@ -126,8 +126,8 @@
                                 class="rounded-circle" height="22" alt="" loading="lazy" />
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end bg-light text-bg-dark"
-                            aria-labelledby="profile_dropdown">
-                            <li><a class="dropdown-item" href="#">My profile</a></li>
+                            aria-labelledby="profile_icon_dropdown">
+                            <li><a class="dropdown-item" href="{% url 'my_profile' %}">My profile</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                         </ul>
