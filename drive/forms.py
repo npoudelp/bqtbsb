@@ -11,3 +11,5 @@ class tags_form(forms.ModelForm):
     class Meta:
         model = tags
         fields = ['tag_name']
+
+

@@ -8,7 +8,7 @@ class tags(models.Model):
 
     def __str__(self):
         return self.tag_name
-
+    
 
 class upload_files(models.Model):
     FILE_STATUS_CODE = [
@@ -20,11 +20,8 @@ class upload_files(models.Model):
     upload_date = models.DateField(default=timezone.now(), blank=True, null=False)
     file_status = models.CharField(choices=FILE_STATUS_CODE, max_length=20, null=False, blank=False, default="Red")
     is_shared = models.BooleanField(default=False)
+    is_liked = models.BooleanField(default=False)
     image_tag = models.ForeignKey(tags, on_delete=models.PROTECT, null=False, blank=True, default="Null")
     
     def __str__(self):
         return self.file_path
-
-
-    
-
