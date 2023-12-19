@@ -18,8 +18,8 @@
         <div class="col-md-6">
             <p class="h3 border-bottom">
                 My Information
-                <span data-bs-toggle="modal" data-bs-target="#update_profile" class="text-end"><i
-                        class="bi bi-pen"></i></span>
+                <span data-bs-toggle="modal" data-bs-target="#update_profile" class="text-end">
+                    <i class="text-secondary mx-5 bi bi-pencil"></i></span>
             </p>
             <span class="lead">
                 Name: {{profile.user_name}}
@@ -31,7 +31,7 @@
             <br>
             <span class="lead">
                 Phone: {{profile.user_phone}}
-            </span> 
+            </span>
             <br>
             <span class="lead">
                 Email: {{profile.user_email}}
@@ -41,8 +41,8 @@
                 Last Modified: {{profile.last_update}}
             </span>
         </div>
-        <div class="col-md-6">
-
+        <div class="col-md-6 py-3">
+            <img src="{{profile.user_image.url}}" class="rounded-5 img-thumbnail " style="max-height: 300px;" alt="" srcset="">
         </div>
     </div>
 
@@ -54,7 +54,7 @@
                     <h5 class="modal-title" id="model_header">Add tags for files</h5>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <table>
                             {{profile_update_form|crispy}}
