@@ -115,6 +115,6 @@ def file_viewer(request, id):
         "upload_form": upload_files_form,
         'tags': get_from_tags(),
         'add_tag_form': tags_form,
-        'image': file
+        'image': file,
     }
     return render(request, "drive/file_viewer.html", res)
