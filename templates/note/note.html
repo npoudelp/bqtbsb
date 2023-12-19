@@ -1,0 +1,31 @@
+{%extends 'frame.html'%}
+{%load crispy_forms_tags%}
+{%block title%}Drive | bqtbsb{% endblock %}
+
+{% block note_active %}active{% endblock %}
+
+{% block style_added %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block header_misc %}
+
+
+
+{% endblock %}
+
+{% block body %}
+
+{%endblock%}
+
+{% block misc_script %}
+<script>
+    delete_image = (id) => {
+        if (confirm("Deleted files can never be recovered. Do you wish to process?")) {
+            window.location.href = "{% url 'drive:delete_file' id=1234 %}".replace(/1234/, id.toString());
+        }
+    }
+</script>
+{% endblock %}
