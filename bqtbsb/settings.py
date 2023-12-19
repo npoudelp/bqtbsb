@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'drive',
     'crispy_forms',
     'crispy_bootstrap4',
+    'note',
 ]
 
 MIDDLEWARE = [
