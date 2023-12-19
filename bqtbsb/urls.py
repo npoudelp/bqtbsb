@@ -22,11 +22,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+app_name = 'bqtbsb'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.dashboard, name='dashboard'),
     path('drive/', include(drive_path), name='drive'),
-    path('login', views.user_login, name='login'),
-    path('logout', views.user_logout, name='logout'),
-    path('profile', views.my_profile, name='my_profile'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
+    path('profile/', views.my_profile, name='my_profile'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
