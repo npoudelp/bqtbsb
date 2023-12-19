@@ -16,7 +16,7 @@
 
     <style>
         body {
-            overflow-x:hidden;
+            overflow-x: hidden;
         }
 
         @media (min-width: 991.98px) {
@@ -126,8 +126,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
                             id="profile_icon_dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://fiverr-res.cloudinary.com/t_profile_original,q_auto,f_auto/attachments/profile/photo/05c31efa770d1c5f5df8fc16900aeb12-1653408560119/e6886dcf-9377-424e-8a48-30c08685944f.jpeg"
-                                class="rounded-circle" height="22" alt="" loading="lazy" />
+                            <img src="{{request.session.profile_image}}" class="rounded-circle" height="22" alt=""
+                                loading="lazy" />
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end bg-light text-bg-dark"
                             aria-labelledby="profile_icon_dropdown">
