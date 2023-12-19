@@ -9,9 +9,7 @@ from django.http import Http404
 
 @login_required(login_url='login')
 def dashboard(request):
-    res = {
-        'profile': profile.objects.get(user_user=request.user.username),
-    }
+    res = {}
     return render(request, "dashboard.html", res)
 
 
@@ -24,6 +22,10 @@ def user_login(request):
 
         if user_auth is not None:
             login(request, user_auth)
+            try:
+                request.session['profile_image'] = profile.objects.get(user_user=user_auth).user_image.url
+            except profile.DoesNotExist:
+                profile_image = None
             messages.success(request, f"Welcome, {user_auth}")
             return redirect('dashboard')
         else:
