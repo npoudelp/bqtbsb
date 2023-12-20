@@ -46,21 +46,20 @@ def user_logout(request):
 @login_required(login_url='login')
 def my_profile(request):
 
-    update = False
+    update = True
     try:
         data = profile.objects.get(user_user=request.user.username)
         update_form = my_profile_form(instance=data)
-        update = True
 
     except profile.DoesNotExist:
+        update = False
         data = None
         update_form = my_profile_form
-        redirect('my_profile')
 
     if request.method == 'POST':
         update_profile_data = my_profile_form(request.POST, request.FILES, instance=data)
         add_profile = my_profile_form(request.POST, request.FILES)
-        if update_profile_data.is_valid():
+        if update_profile_data.is_valid() and update == True:
             if update_profile_data.save():
                 messages.success(request, "Profile updated...")
             else:
