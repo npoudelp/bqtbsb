@@ -59,7 +59,7 @@ def my_profile(request):
     if request.method == 'POST':
         update_profile_data = my_profile_form(request.POST, request.FILES, instance=data)
         add_profile = my_profile_form(request.POST, request.FILES)
-        if update_profile_data.is_valid() :
+        if update_profile_data.is_valid() and update == True:
             if update_profile_data.save():
                 messages.success(request, "Profile updated...")
             else:
