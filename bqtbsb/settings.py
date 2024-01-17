@@ -24,8 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7!8+gi($$59r(5mil=917yl_$72p5fe672s#e=bc5*l!#k*hbl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = True
 ALLOWED_HOSTS = [
     'www.bqtbsb.nirojpoudel.com.np',
     'bqtbsb.nirojpoudel.com.np',
@@ -138,9 +137,13 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/static/'
 if DEBUG:
-  STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')
+  STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+  ]
+
+  ALLOWED_HOSTS.append('127.0.0.1')
 else:
-  STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+  STATIC_ROOT = os.path.join(BASE_DIR, 'media/static')
 
 MEDIA_ROOT = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
