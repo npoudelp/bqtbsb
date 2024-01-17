@@ -22,16 +22,18 @@ def my_drive(request):
     }
 
     if request.method == 'POST':
-        form_data = upload_files_form(request.POST, request.FILES)
+        form_data = upload_files_form(request.POST, request.FILES.getlist)
+
         tags_data = tags_form(request.POST)
-        if form_data.is_valid():
-            form_data.save()
-            messages.success(request, "Image added to drive...")
-        elif tags_data.is_valid():
+        
+        f
+        
+        if tags_data.is_valid():
             tags_data.save()
             messages.success(request, "Tag added...")
         else:
             messages.error(request, "Error performing task...")
+
 
     return render(request, "drive/drive.html", res)
 
@@ -42,7 +44,7 @@ def delete_file(request, id):
     try:
         file = drive_image.objects.get(id=id)
         if file.delete():
-            remove(f'media/{file.file_path.url}')
+            remove(f'{file.file_path.url}')
             messages.success(request, "Image deleted successfully...")
             return redirect('drive:my_drive')
         else:
