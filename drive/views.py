@@ -22,7 +22,7 @@ def my_drive(request):
     }
 
     if request.method == 'POST':
-        form_data = upload_files_form(request.POST, request.FILES.getlist)
+        form_data = upload_files_form(request.POST, request.FILES)
 
         tags_data = tags_form(request.POST)
         
@@ -30,8 +30,11 @@ def my_drive(request):
         if tags_data.is_valid():
             tags_data.save()
             messages.success(request, "Tag added...")
+        elif form_data.is_valid():
+            form_data.save()
+            messages.success(request, "Image uploaded...")
         else:
-            messages.error(request, "Error performing task...")
+            messages.error(request, "Error...")
 
 
     return render(request, "drive/drive.html", res)
