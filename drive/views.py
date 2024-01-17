@@ -26,7 +26,6 @@ def my_drive(request):
 
         tags_data = tags_form(request.POST)
         
-        f
         
         if tags_data.is_valid():
             tags_data.save()
